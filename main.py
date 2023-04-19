@@ -1,3 +1,5 @@
+from tkinter import filedialog
+
 from selenium import webdriver
 from time import sleep
 import requests
@@ -18,6 +20,7 @@ def download_chosen():
 
 
 def oge_download():
+    filepath = filedialog.askdirectory()
     status.config(text='Загрузка вариантов ОГЭ началась', font='Arial 15')
     browser = webdriver.Chrome()
     browser.get('https://rus-oge.sdamgia.ru/')
@@ -32,7 +35,7 @@ def oge_download():
         name = f'oge-{i} вариант'
         i += 1
         print(name)
-        f = open(f'C:\Programming\Projects\egedowloader\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
+        f = open(f'{filepath}\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
         ufr = requests.get(f'https://rus-oge.sdamgia.ru/test?id={variants}&print=true&pdf=z&num=true&attr8=true&attr7=true&tt=&td=')# делаем запрос
         f.write(ufr.content)# записываем содержимое в файл; как видите - content запроса
         print('success!')
@@ -42,7 +45,7 @@ def oge_download():
         name = f'oge-{i} вариант ответы'
         i += 1
         print(name)
-        f = open(f'C:\Programming\Projects\egedowloader\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
+        f = open(f'{filepath}\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
         ufr = requests.get(f'https://rus-oge.sdamgia.ru/test?id={variants}&print=true&pdf=z&sol=true&num=true&ans=true&key=true&attr8=true&attr7=true&tt=&td=')# делаем запрос
         f.write(ufr.content)# записываем содержимое в файл; как видите - content запроса
         print('success!')
@@ -51,6 +54,7 @@ def oge_download():
 
 
 def ege_download():
+    filepath = filedialog.askdirectory()
     status.config(text='Загрузка вариантов ЕГЭ началась', font='Arial 15')
     browser = webdriver.Chrome()
     browser.get('https://rus-ege.sdamgia.ru/')
@@ -65,7 +69,7 @@ def ege_download():
         name = f'ege-{i} вариант'
         i += 1
         print(name)
-        f = open(f'C:\Programming\Projects\egedowloader\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
+        f = open(f'{filepath}\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
         ufr = requests.get(f'https://rus-ege.sdamgia.ru/test?id={variants}&print=true&pdf=z&num=true&tt=&td=')# делаем запрос
         f.write(ufr.content)# записываем содержимое в файл; как видите - content запроса
         print('success!')
@@ -75,7 +79,7 @@ def ege_download():
         name = f'ege-{i} вариант ответы'
         i += 1
         print(name)
-        f = open(f'C:\Programming\Projects\egedowloader\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
+        f = open(f'{filepath}\{name}.pdf', "wb")# открываем файл для записи, в режиме wb
         ufr = requests.get(f'https://rus-ege.sdamgia.ru/test?id={variants}&print=true&pdf=z&sol=true&num=true&ans=true&key=true&attr5=true&tt=&td=')# делаем запрос
         f.write(ufr.content)# записываем содержимое в файл; как видите - content запроса
         print('success!')
